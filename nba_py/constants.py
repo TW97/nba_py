@@ -1,10 +1,13 @@
 from datetime import datetime
 
-_curr_year = datetime.now().year
-if datetime.now().month > 6:
-    CURRENT_SEASON = str(_curr_year) + "-" + str(_curr_year + 1)[2:]
-else:
-    CURRENT_SEASON = str(_curr_year - 1) + "-" + str(_curr_year)[2:]
+def set_current_season():
+    curr_year = datetime.now().year
+    current_season = '{}-{}'.format(curr_year - 1, str(curr_year)[2:])
+    if datetime.now().month > 6:
+        current_season = '{}-{}'.format(curr_year, str(curr_year+1)[2:])
+    return current_season
+
+CURRENT_SEASON = set_current_season()
 
 TEAMS = {
     'ATL': {
@@ -221,7 +224,7 @@ TEAMS = {
         'division': 'Northwest',
         'id': '1610612750',
         'name': 'Timberwolves',
-        'color': '#003F70',
+        'color': '003F70',
         'colors': ['003F70', '006F42', 'BAC4CA', 'FFE211', 'DE2032', '000000']
     }, 'NOP': {
         'abbr': 'NOP',
@@ -329,7 +332,7 @@ TEAMS = {
         'division': 'Southwest',
         'id': '1610612759',
         'name': 'Spurs',
-        'color': '#BA24CA',
+        'color': 'BA24CA',
         'colors': ['BA24CA', '000000']
     }, 'TOR': {
         'abbr': 'TOR',
@@ -385,6 +388,8 @@ class _DefaultZero:
 
 class League:
     NBA = '00'
+    GLeague = '20'
+    WNBA = '10'
     Default = NBA
 
 
@@ -422,7 +427,18 @@ class MeasureType:
 
 class PtMeasureType:
     SpeedDistance = 'SpeedDistance'
-
+    Drives = 'Drives'
+    Defense = 'Defense'
+    CatchShoot = 'CatchShoot'
+    Passing = 'Passing'
+    Possessions = 'Possessions'
+    PullUpShot = 'PullUpShot'
+    Rebounding = 'Rebounding'
+    Efficiency = 'Efficiency'
+    ElbowTouch = 'ElbowTouch'
+    PostTouch = 'PostTouch'
+    PaintTouch = 'PaintTouch'
+    Default = SpeedDistance
 
 class GroupQuantity:
     Default = 5
